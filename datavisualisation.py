@@ -14,7 +14,7 @@ with dataset:
     st.header("Campaign analytics dataset")
     st.text("This dataset was given to us by our instructor")
 
-    campaign_data = pd.read_csv('C:/Users/U761133/Desktop/Project3/campaignanalytics2.csv')
+    campaign_data = pd.read_csv('campaignanalytics2.csv')
     st.write(campaign_data.head())
 
     st.subheader('Several distributions')
