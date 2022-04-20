@@ -17,9 +17,15 @@ with dataset:
     campaign_data = pd.read_csv('C:/Users/U761133/Desktop/Project3/campaignanalytics2.csv')
     st.write(campaign_data.head())
 
-    st.subheader('Pick up revenue distribution')
-    our_data = pd.DataFrame(campaign_data['Revenue'].value_counts()).head(50)
-    st.bar_chart(our_data)
+    st.subheader('Several distributions')
+    campaign_data_by_Region = campaign_data.groupby(['Region']).sum()[["Revenue", "Revenue_Target"]]
+    campaign_data_by_Country = campaign_data.groupby(['Country']).sum()[["Revenue", "Revenue_Target"]]
+    campaign_data_by_Product_Category = campaign_data.groupby(['Product_Category']).sum()[["Revenue", "Revenue_Target"]]
+    campaign_data_by_Campaign_Name = campaign_data.groupby(['Campaign_Name']).sum()[["Revenue", "Revenue_Target"]]
+    st.bar_chart(campaign_data_by_Region)
+    st.area_chart(campaign_data_by_Country)
+    st.line_chart(campaign_data_by_Product_Category)
+    st.bar_chart(campaign_data_by_Campaign_Name)
 
 with features:
     st.header("The features we created")
