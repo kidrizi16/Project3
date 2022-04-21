@@ -43,5 +43,5 @@ original = pd.read_csv('olympic.csv')
 df6 = original[original[["Age", "Height", "Weight", "Sport"]].notnull().all(1)]
 df6 = df6[df6["Sport"] == 'Judo']
 df6_2 = df6[["Age", "Height", "Weight"]]
-ax = sns.boxplot(x="day", y="total_bill", hue="smoker",
-...                  data=tips, palette="Set3")
+fig2 = sns.boxplot(x="Age", data=df6_2, palette="Set3")
+fig2.figure
