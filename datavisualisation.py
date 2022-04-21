@@ -40,10 +40,22 @@ with dataset:
     st.line_chart(campaign_data_by_Product_Category)
     st.bar_chart(campaign_data_by_Campaign_Name)
 
-
-with features:
-    st.header("The features we created")
-
 with model_training:
     st.header("Time to train the model!")
     st.text("Here you get to choose the hyperparameters of the model and see how the performance changes.")
+
+
+@st.cache
+def get_selected_data():
+    all_data = pd.read_csv('campaignanalytics2.csv')
+    return all_data.set_index("Country")
+
+
+df = get_selected_data()
+countries = st.multiselect(
+    "Choose countries", list(df.index)
+)
+if not countries:
+    st.error("Please select at least one country.")
+our_data = df.loc[countries]
+st.write(our_data)
