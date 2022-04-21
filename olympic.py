@@ -43,5 +43,12 @@ original = pd.read_csv('olympic.csv')
 df6 = original[original[["Age", "Height", "Weight", "Sport"]].notnull().all(1)]
 df6 = df6[df6["Sport"] == 'Judo']
 df6_2 = df6[["Age", "Height", "Weight"]]
+
 fig2 = sns.boxplot(x="Age", data=df6_2, palette="Set3")
 fig2.figure
+
+fig3 = sns.violinplot(x="Height", data=df6_2, palette="Set3")
+fig3.figure
+
+fig4 = sns.swarmplot(x="Weight", data=df6_2, palette="Set3")
+fig4.figure
