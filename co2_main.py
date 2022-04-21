@@ -26,7 +26,7 @@ selected_year = st.sidebar.selectbox('Year', list((range(1958,2019))))
 @st.cache
 def load_data(year):
     innerdf = pd.read_csv('co2.csv')
-    return innerdf[innerdf.filter(['Date']).Date.str.endswith(f'{selected_year}') == True]
+    return innerdf[innerdf.filter(['Date']).Date.str.startswith(f'{selected_year}') == True]
 
 
 df_year = load_data(selected_year)

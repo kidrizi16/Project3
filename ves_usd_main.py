@@ -28,7 +28,6 @@ with dataset:
 st.sidebar.header('User Input Features')
 selected_month = st.sidebar.selectbox('Month', list((range(3,10))))
 
-
 @st.cache
 def load_data(month):
     innerdf = pd.read_csv('ves-usd.csv')
@@ -42,3 +41,5 @@ st.write('Data Dimension: ' + str(df_month.shape[0]) + ' rows and ' + str(df_mon
 st.dataframe(df_month)
 df_month_chart = df_month[["Date", "Rate"]].rename(columns={'Date':'index'}).set_index('index')
 st.line_chart(df_month_chart)
+
+

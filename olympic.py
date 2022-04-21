@@ -3,6 +3,8 @@ import pandas as pd
 import pyodbc
 import numpy as np
 import plotly.express as px
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 header = st.container()
 dataset = st.container()
@@ -37,14 +39,9 @@ df1_final = df1_final.reset_index()
 fig = px.scatter(df1_final, x="Height", y="Weight", size ="Medal", log_x=True, size_max=60)
 fig.show()
 
-"""
 original = pd.read_csv('olympic.csv')
-# Extract count of medals per country per year
-df2 = original.groupby(['Name', 'Medal']).count()  # Group data and count medals by type
-df2 = df2.reset_index()
-df2 = df2.iloc[:, 4:6]  # Selected needed columns and drop excess
-df2 = df2.rename(columns={'Name': 'Medal'})
-
-# Combine all information: gdp and medal count
-final_df = pd.merge(medals_df, df3, left_on=['country_name', 'year'], right_on=['country_name', 'year'])
-"""
+df6 = original[original[["Age", "Height", "Weight", "Sport"]].notnull().all(1)]
+df6 = df6[df6["Sport"] == 'Judo']
+df6_2 = df6[["Age", "Height", "Weight"]]
+ax = sns.boxplot(x="day", y="total_bill", hue="smoker",
+...                  data=tips, palette="Set3")
