@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pyodbc
+import numpy as np
 
 header = st.container()
 dataset = st.container()
@@ -15,20 +16,15 @@ with dataset:
     st.header("Number of medals")
     st.text("This dataset was given to us by our instructor")
 
+    df = pd.read_csv('olympic.csv')[["NOC", "Medal"]]
+    df['Gold'] = np.where(df['Medal'] == 'Gold', 1, 0)
+    df['Silver'] = np.where(df['Medal'] == 'Silver', 1, 0)
+    df['Bronze'] = np.where(df['Medal'] == 'Bronze', 1, 0)
+    df2 = df.groupby(['NOC']).sum()[["Gold", "Silver", "Bronze"]]
+    olypmic=df2.query('Gold + Silver + Bronze >= 500')
 
-    olypmic = pd.read_csv('olympic.csv') 
     st.write(olypmic.head())
 
     st.subheader('Distributions')
 
     st.bar_chart(olypmic)
-    st.area_chart(olypmic)
-    st.line_chart(olypmic)
-    st.bar_chart(olypmic)
-
-with features:
-    st.header("The features we created")
-
-with model_training:
-    st.header("Time to train the model!")
-    st.text("Here you get to choose the hyperparameters of the model and see how the performance changes.")
